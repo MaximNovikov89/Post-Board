@@ -1,12 +1,13 @@
 import React from 'react';
-import './App.css';
-import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Auth from './Auth/Auth';
 
 function App() {
-  return (
-    <div className="App">
 
-    </div>
+
+  return (
+
+    <Auth />
+
   );
 }
 
