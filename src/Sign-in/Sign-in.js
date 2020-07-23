@@ -9,9 +9,10 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import uuid from 'uuid';
+import { makeStyles } from '@material-ui/core/styles';
+
+import { signInWithGoogle } from '../firebase/firebase.utils';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -58,7 +59,6 @@ export default function SignIn() {
                         margin="normal"
                         required
                         fullWidth
-                        // id={uuid()}
                         label="Email Address"
                         name="email"
                         autoComplete="off"
@@ -72,7 +72,6 @@ export default function SignIn() {
                         name="password"
                         label="Password"
                         type="password"
-                        // id={uuid()}
                         autoComplete="current-password"
                     />
                     <FormControlLabel
@@ -87,6 +86,16 @@ export default function SignIn() {
                         className={classes.submit}
                     >
                         Sign In
+                    </Button>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={signInWithGoogle}
+                    >
+                        Sign In With Google
                     </Button>
                     <Grid container>
                         {/* <Grid item xs>
