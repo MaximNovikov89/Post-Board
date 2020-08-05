@@ -44,7 +44,8 @@ export default function SignUp() {
         email: '',
         lastName: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        photoURL: 'https://www.jumpstarttech.com/files/2018/08/Network-Profile.png'
     });
     const history = useHistory();
 
@@ -58,7 +59,7 @@ export default function SignUp() {
     //Sign-Up with email/Password firebase
     const handleSignUp = async event => {
         event.preventDefault();
-        const { displayName, email, password, confirmPassword } = userInfo;
+        const { displayName, email, password, confirmPassword, photoURL } = userInfo;
         if (password !== confirmPassword) {
             alert("password don't match");
             return;
@@ -66,7 +67,7 @@ export default function SignUp() {
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password).catch(function (error) { console.log(error); });
 
-            await createUserProfileDocument(user, { displayName });
+            await createUserProfileDocument(user, { displayName, photoURL });
 
             setUserInfo({});
             history.push('/log-in');

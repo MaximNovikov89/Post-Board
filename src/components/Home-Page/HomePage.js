@@ -22,9 +22,9 @@ export default function HomePage() {
         }
     }));
     const classes = useStyles();
-    //==========Styles-MaterialUI==========//
 
 
+    //==========States=========//
     const [currentUser, setCurrentUser] = useState({});
     const user = useSelector(state => state.user);
     const [isModal, setIsModal] = useState(false);
@@ -35,9 +35,8 @@ export default function HomePage() {
             setCurrentUser(user);
         }
     }, [user]);
-    //==========UseEffect==========//
 
-
+    //==========Methods=========//
     const handleModal = () => {
         setIsModal(!isModal);
     }

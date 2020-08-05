@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
     NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    Col,
-    Row
+    Col
 } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -47,11 +37,9 @@ const HomeNavbar = () => {
 
 
 
-
-    const handleSignOut = () => {
-        auth.signOut();
+    const handleSignOut = async () => {
+        await auth.signOut();
         history.push('/log-in');
-
     }
 
     return (
@@ -90,23 +78,3 @@ const HomeNavbar = () => {
 export default HomeNavbar;
 
 //<a href='https://pngtree.com/so/icon'>icon png from pngtree.com</a>
-
-{/* <NavbarText>{`hello ${userName}`}</NavbarText> */ }
-
-{/* <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Options
-                             </DropdownToggle>
-                            <DropdownMenu right>
-                                <DropdownItem>
-                                    Option 1
-                                    </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
-                                        </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown> */}

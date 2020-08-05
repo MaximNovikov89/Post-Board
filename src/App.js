@@ -20,7 +20,8 @@ function App() {
 
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
-            ...userAuth
+            ...userAuth,
+            ...snapShot.data()
           });
         });
       }
@@ -28,12 +29,11 @@ function App() {
         setCurrentUser(userAuth);
       }
     });
-    console.log('render');
     return () => {
       unsubscribeFromAuth();
     }
   }, []);
-  dispatch({ type: actions.Add_USER_OBJ, value: currentUser });
+  dispatch({ type: actions.ADD_USER_OBJ, value: currentUser });
 
   return (
 

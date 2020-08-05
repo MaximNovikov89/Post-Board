@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GreetingPage() {
     const classes = useStyles();
-
+    const greetingText = ['Share your thoughts pictures and work ', <br />, 'or what ever is on your to mind'];
 
 
     return (
@@ -31,7 +31,7 @@ export default function GreetingPage() {
             <div className='mainCoverGrid'>
                 <div className='mainCover'>
                     <h1 className='mainHeader'>Post-Board</h1>
-                    <h3 className='mainSubHeader'>Share your thoughts pictures and work or what ever is on your to mind</h3>
+                    <h3 className='mainSubHeader'>{greetingText}</h3>
 
                     <Link to='/log-in' className='joinLink'>
                         <Button variant="contained" color="primary" className='mainJoinButton'>Join</Button>

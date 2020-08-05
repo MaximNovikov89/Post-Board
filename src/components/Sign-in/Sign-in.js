@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+
+    //==========States=========//
     const history = useHistory();
     const classes = useStyles();
     const [userInfo, setUserInfo] = useState({
@@ -45,9 +47,10 @@ export default function SignIn() {
         password: ''
     })
 
-    // const dispatch = useDispatch();
-    // const user = useSelector(state => state.user);
+    //==========useEffect=========//
 
+
+    //==========Methods=========//
     const googleSignIn = async (event) => {
         event.preventDefault();
         await signInWithGoogle();
@@ -60,7 +63,6 @@ export default function SignIn() {
             [evt.target.name]: evt.target.value
         })
     }
-
     const handleSubmit = async event => {
         event.preventDefault();
         const { email, password } = userInfo;
@@ -69,7 +71,12 @@ export default function SignIn() {
             setUserInfo({ email: '', password: '' });
             history.push('/homepage');
         } catch (error) {
-            console.log(error);
+            if (error.code === 'auth/user-not-found') {
+                alert("You have not registered yet")
+            }
+            else {
+                console.log(error);
+            }
         }
     }
 

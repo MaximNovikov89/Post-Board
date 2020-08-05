@@ -1,19 +1,30 @@
-// import uuid from 'react-uuid';
-// import * as actions from '../Actions/actions';
 
 const initialState = {
-    user: null
+    user: null,
+    postListType: 'global',
+    posts: [],
 };
 
 function rootReducer(state = initialState, actions) {
     switch (actions.type) {
-        case 'Add_USER_OBJ':
+
+        case 'ADD_USER_OBJ':
             return {
                 ...state,
                 user: actions.value
-
             }
 
+        case 'SET_POST_LIST_TYPE':
+            return {
+                ...state,
+                postListType: actions.value
+            }
+
+        case 'SET_POSTS':
+            return {
+                ...state,
+                posts: actions.value
+            }
         default: return state;
     }
 }

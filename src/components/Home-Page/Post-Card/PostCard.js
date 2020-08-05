@@ -12,10 +12,15 @@ import { blue } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useSelector } from 'react-redux';
+import './Post_card.css';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
+        maxHeight: 450,
+        height: 300
     },
     media: {
         height: 0,
@@ -26,24 +31,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PostCard() {
+export default function PostCard(props) {
+    //==========States=========//
+    const user = useSelector(state => state.user);
     const classes = useStyles();
-
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
-                        R
-          </Avatar>
+
+                        <img src={props.post.photoURL} alt="avatar" size={10} className="avatar__image" />
+                    </Avatar>
                 }
                 action={
                     <IconButton aria-label="settings">
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title="Shrimp and Chorizo Paella"
-                subheader="September 14, 2016"
+                title={props.post.displayName}
+                subheader={props.post.header}
             />
             <CardMedia
                 className={classes.media}
@@ -52,9 +59,9 @@ export default function PostCard() {
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    This impressive paella is a perfect party dish and a fun meal to cook together with your
-                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography>
+                    {props.post.content}
+
+                </Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
