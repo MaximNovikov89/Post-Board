@@ -23,8 +23,8 @@ export default function ProfileCard(props) {
     return (
 
         <div>
-            <div className="card">
-                <img src={props.avatarUrl} alt="avatar" className="card__image" />
+            <div className="profileCard">
+                <img src={props.avatarUrl} alt="avatar" className="profileCard__image" />
                 <p className="card__name">{props.userName}</p>
                 <ul className='cardList'>
                     <button value='global' onClick={handlePostType}>Global Posts</button>

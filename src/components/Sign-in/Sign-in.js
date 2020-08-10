@@ -74,6 +74,9 @@ export default function SignIn() {
             if (error.code === 'auth/user-not-found') {
                 alert("You have not registered yet")
             }
+            if (error.code === 'auth/wrong-password') {
+                alert("Wrong Password try again")
+            }
             else {
                 console.log(error);
             }

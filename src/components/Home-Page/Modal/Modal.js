@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import firebase from "firebase/app";
+// import UploadImage from '../Image-Uploader/ImageUploader';
 
 
 const PostModal = (props) => {
@@ -46,7 +47,11 @@ const PostModal = (props) => {
             ...currentPost,
             id: uuid(),
             [element.target.name]: element.target.value,
-            photoURL: user.photoURL
+            photoURL: user.photoURL,
+            createdAt: {
+                date: new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear(),
+                time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
+            }
         })
     }
     //post to database//
@@ -81,6 +86,9 @@ const PostModal = (props) => {
             );
         props.handleModal();
     }
+    // const addPicture = (pic) => {
+    //     setCurrentPost(prevState => ({ ...prevState, image: pic }));
+    // }
     return (
         <div>
             {/* <Button color="danger" onClick={toggle}>{buttonLabel}</Button> */}
@@ -109,12 +117,19 @@ const PostModal = (props) => {
                     </FormGroup>
                 </ModalBody>
 
+
+                {/* <TextField
+                    id="standard-basic"
+                    label="Add picture..."
+                    name="header"
+                    disabled />
+                <UploadImage singleImage addPicture={addPicture} /> */}
                 <ModalFooter>
                     <Button color="primary" onClick={handlePost}>Post</Button>
                     <Button color="secondary" onClick={props.handleModal}> Cancel</Button>
                 </ModalFooter>
-
             </Modal>
+
         </div>
     );
 }

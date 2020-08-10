@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useSelector } from 'react-redux';
 import './Post_card.css';
@@ -18,13 +19,14 @@ import './Post_card.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 345,
-        maxHeight: 450,
-        height: 300
+        width: 700,
+        maxWidth: 700,
+        height: 500,
+        maxHeight: 850,
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        // height: 0,
+        // paddingTop: '56.25%', // 16:9
     },
     avatar: {
         backgroundColor: blue[500],

@@ -2,6 +2,8 @@
 
 /** @format */
 
+/** @format */
+
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500&display=swap');
 
 // .container {
@@ -15,7 +17,7 @@
 // 	font-family: 'Baloo Paaji 2', cursive;
 // }
 
-.card {
+.profileCard {
 	background-color: #3d5a80;
 	height: 39.1rem;
 	width: 100%;
@@ -31,7 +33,7 @@
 	font-size: 1.5em;
 }
 
-.card__image {
+.profileCard__image {
 	height: 120px;
 	width: 120px;
 	border-radius: 50%;

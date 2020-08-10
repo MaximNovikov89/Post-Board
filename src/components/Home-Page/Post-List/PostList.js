@@ -3,6 +3,7 @@ import PostCard from '../Post-Card/PostCard';
 import { useSelector, useDispatch } from 'react-redux';
 import firebase from "firebase/app";
 import * as actions from '../../../Actions/actions';
+import PostCard2 from '../Post-Card/PostCard2';
 
 
 
@@ -13,10 +14,7 @@ const List = () => {
     const user = useSelector(state => state.user);
     const posts = useSelector(state => state.posts);
     const postType = useSelector(state => state.postListType);
-    console.log(postType);
     const dispatch = useDispatch();
-    const [usersPostList, setUsersPostList] = useState([]);
-    const [globalPostList, setGlobalDisplayList] = useState([]);
 
     //==========useEffect=========//
 
@@ -95,15 +93,12 @@ const List = () => {
 
     return (
         <>
-            <ul>
-                {posts.map(post =>
+            {posts.map(post =>
 
-                    <li className="list-group-item" style={{ display: 'inline-block', margin: '1rem' }} key={post.id}>
-                        <PostCard post={post} user={user} />
-                    </li>
+                <PostCard2 key={post.id} post={post} user={user} />
 
-                )}
-            </ul>
+
+            )}
         </>
     )
 };
