@@ -1,54 +1,119 @@
-import React from 'react';
-import './ProfileCard.scss';
-import * as actions from '../../../Actions/actions';
-import { useDispatch } from 'react-redux';
-import Button from '@material-ui/core/Button';
+// import React, { useState, useEffect } from 'react';
+// import './ProfileCard.scss';
+// import { useSelector } from 'react-redux';
+// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+// import IconButton from '@material-ui/core/IconButton';
 
 
+// export default function ProfileCard(props) {
 
+
+//     const user = useSelector(state => state.user);
+//     const [friendsCount, setFriendsCount] = useState(0);
+
+//     useEffect(() => {
+//         if (user.friends) {
+//             setFriendsCount(user.friends.length)
+//         }
+//     }, [])
+
+//     const handleOpenModal = () => {
+//         props.handleModal();
+//     }
+//     console.log(user);
+//     return (
+
+//         <div>
+//             <div className="profileCard">
+//                 <img src={props.avatarUrl} alt="avatar" className="profileCard__image" />
+//                 <p className="card__name">{props.userName}</p>
+
+//                 <div className="grid-container">
+//                     <div className="grid-child-followers">
+//                         {`${friendsCount} Friends`}
+//                     </div>
+//                 </div>
+//                 <div>
+//                     <IconButton style={{ width: '60px' }} onClick={handleOpenModal}><CloudUploadIcon style={{ width: '60px' }} /></IconButton>
+//                 </div>
+
+//             </div>
+
+
+//         </div>
+
+
+//     )
+// }
+
+
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import {
+    makeStyles,
+    Card,
+    CardHeader,
+    CardContent,
+    CardActions,
+    Avatar,
+    IconButton,
+    Typography
+} from '@material-ui/core';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '80%',
+        height: '30%',
+        maxWidth: 500,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+}));
 
 export default function ProfileCard(props) {
-    const dispatch = useDispatch();
+    const classes = useStyles();
 
+    const user = useSelector(state => state.user);
+    const [friendsCount, setFriendsCount] = useState(0);
+
+    useEffect(() => {
+        if (user.friends) {
+            setFriendsCount(user.friends.length)
+        }
+    }, [])
 
     const handleOpenModal = () => {
         props.handleModal();
     }
-    const handlePostType = (element) => {
-        const val = element.target.value;
-        console.log(element.target.value);
-        dispatch({ type: actions.SET_POST_LIST_TYPE, value: val });
-    }
+
 
     return (
+        <Card className={classes.root}>
+            <CardHeader
+                avatar={
+                    <Avatar src={props.avatarUrl} aria-label="recipe" >
 
-        <div>
-            <div className="profileCard">
-                <img src={props.avatarUrl} alt="avatar" className="profileCard__image" />
-                <p className="card__name">{props.userName}</p>
-                <ul className='cardList'>
-                    <button value='global' onClick={handlePostType}>Global Posts</button>
-                    <button value='users' onClick={handlePostType}>My Posts</button>
-                </ul>
-                <div className="grid-container">
-                    <div className="grid-child-posts">
-                        0 Post
-                    </div>
+                    </Avatar>
+                }
 
-                    <div className="grid-child-followers">
-                        0 Friends
-                     </div>
-                </div>
-                <div>
-                    <button xs='2' className="profileBtn draw-border" onClick={handleOpenModal}>Post</button>
-                    <button xs='2' className="profileBtn draw-border">Upload</button>
-                </div>
+                title={props.userName}
+                subheader="Optional Content"
+            />
+            <CardContent>
+                <Typography variant="button" color="textSecondary" component="p">
+                    {`${friendsCount} Friends`}
+                </Typography>
+            </CardContent>
+            <CardActions >
+                <IconButton component="span">
+                    <CloudUploadOutlinedIcon fontSize="large" onClick={handleOpenModal} />
+                </IconButton>
+            </CardActions>
 
-            </div>
-
-
-        </div>
-
-
-    )
+        </Card>
+    );
 }

@@ -10,7 +10,8 @@ import { Card, CardHeader, CardContent, CardFooter, Link, Row, Col } from 'frame
 export default function PostCard2(props) {
     const post = props.post;
     return (
-        <Card style={{ marginBottom: '20px', border: '1px solid black', width: '100%' }}>
+        <Card style={{ margin: '0 0 20px 20px', border: '1px solid black', width: '75%' }
+        }>
 
             <CardHeader style={{ backgroundColor: '#8ebfde' }}>
                 <Row>
@@ -18,7 +19,7 @@ export default function PostCard2(props) {
                         <div ><img src={post.photoURL} width="34" height="34" /><span style={{ padding: '15px' }}>{post.author}</span></div>
                     </Col>
                     <Col ><div style={{ textAlign: 'center', fontSize: 20 }} >{post.header}</div></Col>
-                    <Col style={{ textAlign: 'end' }}><EventNoteTwoToneIcon />{post.createdAt.date}</Col>
+                    <Col style={{ textAlign: 'end' }}><EventNoteTwoToneIcon />{post.createdAt.date}<br />{post.createdAt.time}</Col>
                 </Row>
             </CardHeader>
 
@@ -26,8 +27,6 @@ export default function PostCard2(props) {
             <CardContent>
                 <Row style={{ position: 'relative', left: '15px' }}>
                     <Col style={{ padding: '10px' }}>{post.content}</Col>
-                    <Col></Col>
-                    <Col></Col>
                 </Row>
                 <Row>
                     <Col></Col>
@@ -49,10 +48,8 @@ export default function PostCard2(props) {
             <CardFooter className="no-border">
                 <Link>Like</Link>
                 <Link>Comment</Link>
-                <Link>Share</Link>
             </CardFooter>
 
-
-        </Card>
+        </Card >
     )
 }

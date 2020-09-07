@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label, FormText } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import firebase from "firebase/app";
 // import UploadImage from '../Image-Uploader/ImageUploader';
@@ -50,8 +50,10 @@ const PostModal = (props) => {
             photoURL: user.photoURL,
             createdAt: {
                 date: new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear(),
-                time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
-            }
+                time: new Date().getHours() + ":" + new Date().getMinutes(),
+            },
+            exactTime: new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear() + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
+
         })
     }
     //post to database//
@@ -114,6 +116,13 @@ const PostModal = (props) => {
                             maxLength={200}
                             placeholder='You say...' />
 
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleFile">Photo</Label>
+                        <Input type="file" name="file" id="exampleFile" />
+                        <FormText color="muted">
+                            Upload Your Photo here.
+        </FormText>
                     </FormGroup>
                 </ModalBody>
 

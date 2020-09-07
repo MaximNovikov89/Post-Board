@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PostCard from '../Post-Card/PostCard';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import firebase from "firebase/app";
 import * as actions from '../../../Actions/actions';
@@ -14,7 +13,9 @@ const List = () => {
     const user = useSelector(state => state.user);
     const posts = useSelector(state => state.posts);
     const postType = useSelector(state => state.postListType);
+
     const dispatch = useDispatch();
+    var sortedPosts = posts.sort((a, b) => (a.exactTime > b.exactTime) ? -1 : 1);
 
     //==========useEffect=========//
 
@@ -43,7 +44,7 @@ const List = () => {
                     })
             }
             catch (error) {
-                // console.log(error);
+                console.log(error);
             }
         }
         else {
@@ -74,7 +75,7 @@ const List = () => {
                     })
             }
             catch (error) {
-                // console.log(error);
+                console.log(error);
             }
         }
         return () => { }
@@ -92,14 +93,14 @@ const List = () => {
     // }, []);
 
     return (
-        <>
-            {posts.map(post =>
+        <div>
+            {sortedPosts.map(post =>
 
                 <PostCard2 key={post.id} post={post} user={user} />
 
 
             )}
-        </>
+        </div>
     )
 };
 

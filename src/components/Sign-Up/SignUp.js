@@ -45,7 +45,8 @@ export default function SignUp() {
         lastName: '',
         password: '',
         confirmPassword: '',
-        photoURL: 'https://www.jumpstarttech.com/files/2018/08/Network-Profile.png'
+        photoURL: 'https://www.jumpstarttech.com/files/2018/08/Network-Profile.png',
+        friends: []
     });
     const history = useHistory();
 

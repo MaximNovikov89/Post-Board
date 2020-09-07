@@ -5,8 +5,10 @@ import HomeNavbar from './NavBar/Navbar';
 import { useSelector } from 'react-redux';
 import ProfileCard from './ProfileCard/ProfileCard';
 import Logo from '../../Assest/Images/IconLogo.png';
-import List from './Post-List/PostList';
+import PostList from './Post-List/PostList';
 import PostModal from './Modal/Modal';
+import FriendsSearch from './FriendsSearch/FriendsSearch';
+import FriendsList from './FriendsList/FriendsList';
 
 
 export default function HomePage() {
@@ -14,11 +16,19 @@ export default function HomePage() {
     //==========Styles-MaterialUI==========//
     const useStyles = makeStyles((theme) => ({
         logo: {
-            width: '80px',
-            height: '80px'
+            width: '70px',
+            height: '70px'
         },
         logoUrl: {
             backgroundImage: `url(${Logo})`,
+        },
+        primaryDiv: {
+            backgroundColor: '#f5f5f5',
+            height: '100vh',
+            width: '100%'
+        },
+        profileCard: {
+            marginTop: '6.2%',
         }
     }));
     const classes = useStyles();
@@ -28,6 +38,7 @@ export default function HomePage() {
     const [currentUser, setCurrentUser] = useState({});
     const user = useSelector(state => state.user);
     const [isModal, setIsModal] = useState(false);
+    const [screenView, setScreenView] = useState(<PostList />)
 
     //==========UseEffect==========//
     useEffect(() => {
@@ -40,28 +51,41 @@ export default function HomePage() {
     const handleModal = () => {
         setIsModal(!isModal);
     }
+    const handleSearch = (type, value) => {
+        if (type === 'friends') {
+            setScreenView(<FriendsSearch inputSearch={value} goBack={handleSearch} />);
+        }
+        else {
+            setScreenView(<PostList />);
+
+        }
+    }
+
 
     return (
-        <div style={{ backgroundColor: '#f5f5f5', height: '100vh', width: '100vw' }}>
-            <Row >
+        <div className={classes.primaryDiv} >
+            <Row>
                 <Col xs='12' >
-                    <HomeNavbar />
+                    <HomeNavbar handleSearch={handleSearch} />
                 </Col>
             </Row>
 
-            <Row>
-                <Col xs='2'>
+            <Row style={{ margin: 0 }} className={classes.primaryDiv}>
+
+                <Col xs='3' className={`d-flex justify-content-center ${classes.profileCard}`}>
                     <ProfileCard
+
                         avatarUrl={currentUser.photoURL}
                         userName={currentUser.displayName}
-                        handleModal={handleModal} /></Col>
+                        handleModal={handleModal} />
+                </Col>
 
-                <Col xs='8'>
+                <Col xs='7'>
 
-                    <Row>
-                        <Col xs='12' style={{ overflowY: 'auto', maxHeight: '100vh', padding: '3rem' }}>
+                    <Row >
+                        <Col xs='12' style={{ overflowY: 'scroll', maxHeight: '90vh', padding: '2rem' }}>
 
-                            {isModal ? <PostModal handleModal={handleModal} /> : <List />}
+                            {isModal ? <PostModal handleModal={handleModal} /> : screenView}
 
                         </Col>
                     </Row>
@@ -70,30 +94,7 @@ export default function HomePage() {
 
 
                 <Col xs='2' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
-                    <Row style={{ marginTop: '2rem' }}>
-                        <Col xs='3' />
-
-                        <Col xs='6'><h3>Friends</h3></Col>
-                        <Col xs='3' />
-                    </Row>
-                    <Row>
-                        <Col xs='1'>Icon</Col>
-                        <Col xs='1' />
-                        <Col><p>Friends Name</p></Col>
-                        <Col xs='2' />
-                    </Row>
-                    <Row>
-                        <Col xs='1'>Icon</Col>
-                        <Col xs='1' />
-                        <Col><p>Friends Name</p></Col>
-                        <Col xs='2' />
-                    </Row>
-                    <Row>
-                        <Col xs='1'>Icon</Col>
-                        <Col xs='1' />
-                        <Col><p>Friends Name</p></Col>
-                        <Col xs='2' />
-                    </Row>
+                    <FriendsList currentUser={currentUser} />
                 </Col>
 
 
@@ -102,3 +103,6 @@ export default function HomePage() {
 
     )
 }
+
+// Credits:
+{/* <a href='https://pngtree.com/so/hanging-bulletin-board'>hanging-bulletin-board png from pngtree.com</a> */ }

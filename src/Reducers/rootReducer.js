@@ -16,14 +16,21 @@ function rootReducer(state = initialState, actions) {
 
         case 'SET_POST_LIST_TYPE':
             return {
-                ...state,
-                postListType: actions.value
+                postListType: actions.value,
+                ...state
+
+
             }
 
         case 'SET_POSTS':
             return {
                 ...state,
                 posts: actions.value
+            }
+        case 'SET_FRIENDS_LIST':
+            return {
+                ...state,
+                usersList: actions.value
             }
         default: return state;
     }
