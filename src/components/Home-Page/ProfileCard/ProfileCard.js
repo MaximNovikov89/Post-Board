@@ -1,53 +1,4 @@
-// import React, { useState, useEffect } from 'react';
-// import './ProfileCard.scss';
-// import { useSelector } from 'react-redux';
-// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-// import IconButton from '@material-ui/core/IconButton';
-
-
-// export default function ProfileCard(props) {
-
-
-//     const user = useSelector(state => state.user);
-//     const [friendsCount, setFriendsCount] = useState(0);
-
-//     useEffect(() => {
-//         if (user.friends) {
-//             setFriendsCount(user.friends.length)
-//         }
-//     }, [])
-
-//     const handleOpenModal = () => {
-//         props.handleModal();
-//     }
-//     console.log(user);
-//     return (
-
-//         <div>
-//             <div className="profileCard">
-//                 <img src={props.avatarUrl} alt="avatar" className="profileCard__image" />
-//                 <p className="card__name">{props.userName}</p>
-
-//                 <div className="grid-container">
-//                     <div className="grid-child-followers">
-//                         {`${friendsCount} Friends`}
-//                     </div>
-//                 </div>
-//                 <div>
-//                     <IconButton style={{ width: '60px' }} onClick={handleOpenModal}><CloudUploadIcon style={{ width: '60px' }} /></IconButton>
-//                 </div>
-
-//             </div>
-
-
-//         </div>
-
-
-//     )
-// }
-
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import {
     makeStyles,
@@ -59,13 +10,12 @@ import {
     IconButton,
     Typography
 } from '@material-ui/core';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
-        height: '30%',
+        height: '40%',
         maxWidth: 500,
     },
     media: {
@@ -75,43 +25,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfileCard(props) {
+    //==========States=========//
     const classes = useStyles();
+    const member = useSelector(state => state.currentUser.currentUser);
+    const friendsCount = member.friends.length;
+    const memberSince = member.metadata.creationTime.slice(5, 16);
 
-    const user = useSelector(state => state.user);
-    const [friendsCount, setFriendsCount] = useState(0);
-
-    useEffect(() => {
-        if (user.friends) {
-            setFriendsCount(user.friends.length)
-        }
-    }, [])
-
+    //==========Methods=========//
     const handleOpenModal = () => {
         props.handleModal();
     }
-
 
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Avatar src={props.avatarUrl} aria-label="recipe" >
-
-                    </Avatar>
+                    <Avatar src={props.avatarUrl} ></Avatar>
                 }
-
                 title={props.userName}
-                subheader="Optional Content"
+                subheader={`Member since ${memberSince}`}
             />
             <CardContent>
                 <Typography variant="button" color="textSecondary" component="p">
-                    {`${friendsCount} Friends`}
+                    {friendsCount !== 0 ? `${friendsCount} Friends` : 'No friends :('}
                 </Typography>
             </CardContent>
             <CardActions >
                 <IconButton component="span">
                     <CloudUploadOutlinedIcon fontSize="large" onClick={handleOpenModal} />
                 </IconButton>
+                <Typography>Posts!</Typography>
             </CardActions>
 
         </Card>

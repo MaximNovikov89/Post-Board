@@ -9,10 +9,9 @@ import { useSelector } from 'react-redux';
 
 
 
-export default function FriendsList(props) {
-    const friends = props.currentUser.friends;
-    const currentUser = useSelector(state => state.user);
-
+export default function FriendsList() {
+    const friends = useSelector(state => state.currentUser.currentUser.friends);
+    const currentUser = useSelector(state => state.currentUser.currentUser);
 
     const handleDeleteFriend = (email) => {
         const docRef = firebase.firestore().doc(`users/${currentUser.uid}`);

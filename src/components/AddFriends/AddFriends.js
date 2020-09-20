@@ -8,12 +8,12 @@ import firebase from "firebase/app";
 
 export default function AddFriends(props) {
     const friend = props.user;
-    const currentUser = useSelector(state => state.user);
+    const currentUser = useSelector(state => state.currentUser.currentUser);
 
     //==========Methods=========//
-    // const back = () => {
-    //     props.goBack('back');
-    // }
+    const back = () => {
+        props.goBack('back');
+    }
     const handleAddFriend = () => {
         const docRef = firebase.firestore().doc(`users/${currentUser.uid}`);
 
@@ -55,7 +55,7 @@ export default function AddFriends(props) {
                         console.log(`Error adding Friend ${error}`);
                     }
                 });
-        // back();
+        back();
     };
 
     return (
@@ -68,7 +68,9 @@ export default function AddFriends(props) {
             </CardHeader>
 
 
-            <button onClick={handleAddFriend}>Add Friend</button>
+            {friend.email === currentUser.email
+                ? <button onClick={handleAddFriend} disabled>It's you!</button>
+                : <button onClick={handleAddFriend}>Add Friend</button>}
 
 
         </Card>

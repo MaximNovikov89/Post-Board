@@ -11,9 +11,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
-// import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+// import { useDispatch, useSelector } from 'react-redux'
+// import * as authActions from '../../store/actions/userAuth';
+
 
 
 
@@ -40,22 +42,30 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
 
     //==========States=========//
+    const [promiseVarification, setPromiseVarification] = useState(false);
     const history = useHistory();
     const classes = useStyles();
+    // const dispatch = useDispatch();
+
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: ''
     })
 
-    //==========useEffect=========//
-
-
     //==========Methods=========//
     const googleSignIn = async (event) => {
         event.preventDefault();
-        await signInWithGoogle();
-        history.push('/homepage');
+        let promise;
+        promise = await signInWithGoogle();
+        setPromiseVarification(promise)
+        // dispatch(authActions.googleLogIn());
     };
+
+    useEffect(() => {
+        if (promiseVarification) {
+            history.push('/homepage')
+        }
+    }, [promiseVarification])
 
     const handleChange = (evt) => {
         setUserInfo({
@@ -63,13 +73,14 @@ export default function SignIn() {
             [evt.target.name]: evt.target.value
         })
     }
-    const handleSubmit = async event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        // dispatch(authActions.emailPassLogIn(userInfo.email, userInfo.password))
         const { email, password } = userInfo;
         try {
             await auth.signInWithEmailAndPassword(email, password);
             setUserInfo({ email: '', password: '' });
-            history.push('/homepage');
+            // history.push('/homepage');
         } catch (error) {
             if (error.code === 'auth/user-not-found') {
                 alert("You have not registered yet")

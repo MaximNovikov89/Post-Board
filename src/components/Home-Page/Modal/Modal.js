@@ -14,32 +14,9 @@ const PostModal = (props) => {
     //==========States=========//
     const [modal] = useState(true);
     const [currentPost, setCurrentPost] = useState({});
-    const [posts, setPosts] = useState([]);
-    const user = useSelector(state => state.user);
-
-    //==========useEffect=========//
-    useEffect(() => {
-        //  Fetching Data from firebase and updating component's state  //
-        firebase
-            .firestore()
-            .doc(`users/${user.uid}`)
-            .get()
-            .then(function (doc) {
-
-                if (doc.exists) {
-                    let data = doc.data();
-                    setPosts(data.posts);
-                }
-                else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-
-            }).catch(function (error) {
-                console.log("Error getting document:", error);
-            });
-    }, [])
-
+    // const [posts, setPosts] = useState([]);
+    const posts = useSelector((state) => state.posts.posts)
+    const user = useSelector(state => state.currentUser.currentUser);
 
     //==========Methods=========//
     const handleInput = (element) => {
@@ -52,7 +29,7 @@ const PostModal = (props) => {
                 date: new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear(),
                 time: new Date().getHours() + ":" + new Date().getMinutes(),
             },
-            exactTime: new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear() + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
+            exactTime: new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear() + ":" + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
 
         })
     }

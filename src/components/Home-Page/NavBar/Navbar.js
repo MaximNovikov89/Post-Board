@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
+import { auth } from '../../../firebase/firebase.utils';
+import Logo from '../../../Assest/Images/IconLogo.png';
 import {
     Navbar,
     NavbarBrand,
     Row,
     Col,
 } from 'reactstrap';
-import { makeStyles, Avatar } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import {
+    makeStyles,
+    Avatar,
+    TextField,
+    IconButton
+} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { auth } from '../../../firebase/firebase.utils';
-import Logo from '../../../Assest/Images/IconLogo.png';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import IconButton from '@material-ui/core/IconButton';
+// import TextField from '@material-ui/core/TextField';
+// import IconButton from '@material-ui/core/IconButton';
 
 
 
@@ -43,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'default',
         fontSize: '25px'
     },
+    maxBorder: {
+        maxHeight: '4.5rem'
+    }
 }));
 
 const HomeNavbar = (props) => {
@@ -68,20 +76,20 @@ const HomeNavbar = (props) => {
 
         <Navbar className={classes.navBar} >
             <Row style={{ width: '100%' }}>
-                <Col xs='1'></Col>
+                <Col xs='1' ></Col>
 
-                <Col xs='1' >
+                <Col xs='1' className={classes.maxBorder}>
                     <Avatar className={classes.logoImg} src={Logo} alt='logo' onClick={() => history.push('/homepage')}></Avatar>
                 </Col>
 
-                <Col xs='2' style={{ paddingLeft: '0' }}></Col>
+                <Col xs='2' style={{ paddingLeft: '0' }} className={classes.maxBorder}></Col>
 
                 <Col xs='3'>
                     {/* <NavbarBrand className={classes.navBarBrand}>Post-Board</NavbarBrand> */}
 
                 </Col>
 
-                <Col xs='3'>
+                <Col xs='3' className={classes.maxBorder}>
                     <TextField
                         id="standard-basic"
                         label="Search friends"
@@ -94,8 +102,13 @@ const HomeNavbar = (props) => {
                     </IconButton>
                 </Col>
 
-                <Col xs='1'>
-                    <IconButton color="secondary" component="span" onClick={handleSignOut}><ExitToAppIcon /></IconButton>
+                <Col xs='1' className={classes.maxBorder}>
+                    <span>Log Out</span>
+                    <IconButton color="secondary" component="span" onClick={handleSignOut}>
+
+                        <ExitToAppIcon />
+                    </IconButton>
+
                 </Col>
             </Row>
 

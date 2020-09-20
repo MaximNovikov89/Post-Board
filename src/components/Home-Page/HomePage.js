@@ -35,17 +35,18 @@ export default function HomePage() {
 
 
     //==========States=========//
-    const [currentUser, setCurrentUser] = useState({});
-    const user = useSelector(state => state.user);
+    // const [currentUser, setCurrentUser] = useState({});
+    const currentUser = useSelector(state => state.currentUser.currentUser);
     const [isModal, setIsModal] = useState(false);
-    const [screenView, setScreenView] = useState(<PostList />)
+    const [screenView, setScreenView] = useState(<FriendsList currentUser={currentUser} />)
+
 
     //==========UseEffect==========//
-    useEffect(() => {
-        if (user) {
-            setCurrentUser(user);
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     if (user) {
+    //         setCurrentUser(user);
+    //     }
+    // }, [user]);
 
     //==========Methods=========//
     const handleModal = () => {
@@ -56,11 +57,9 @@ export default function HomePage() {
             setScreenView(<FriendsSearch inputSearch={value} goBack={handleSearch} />);
         }
         else {
-            setScreenView(<PostList />);
-
+            setScreenView(<FriendsList currentUser={currentUser} />);
         }
     }
-
 
     return (
         <div className={classes.primaryDiv} >
@@ -85,7 +84,7 @@ export default function HomePage() {
                     <Row >
                         <Col xs='12' style={{ overflowY: 'scroll', maxHeight: '90vh', padding: '2rem' }}>
 
-                            {isModal ? <PostModal handleModal={handleModal} /> : screenView}
+                            {isModal ? <PostModal handleModal={handleModal} /> : <PostList />}
 
                         </Col>
                     </Row>
@@ -94,7 +93,8 @@ export default function HomePage() {
 
 
                 <Col xs='2' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
-                    <FriendsList currentUser={currentUser} />
+                    {/* <FriendsList currentUser={currentUser} /> */}
+                    {screenView}
                 </Col>
 
 

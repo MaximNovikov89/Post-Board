@@ -16,7 +16,7 @@ export default function PostCard2(props) {
             <CardHeader style={{ backgroundColor: '#8ebfde' }}>
                 <Row>
                     <Col>
-                        <div ><img src={post.photoURL} width="34" height="34" /><span style={{ padding: '15px' }}>{post.author}</span></div>
+                        <div ><img src={post.photoURL} width="34" height="34" alt="Profile Picture" /><span style={{ padding: '15px' }}>{post.author}</span></div>
                     </Col>
                     <Col ><div style={{ textAlign: 'center', fontSize: 20 }} >{post.header}</div></Col>
                     <Col style={{ textAlign: 'end' }}><EventNoteTwoToneIcon />{post.createdAt.date}<br />{post.createdAt.time}</Col>
@@ -31,7 +31,7 @@ export default function PostCard2(props) {
                 <Row>
                     <Col></Col>
                     <Col width="7">
-                        <img src={"https://cdn.framework7.io/placeholder/nature-1000x700-8.jpg"} width="100%" />
+                        <img src={"https://cdn.framework7.io/placeholder/nature-1000x700-8.jpg"} width="100%" alt="Uploaded Picture" />
                     </Col>
                     <Col></Col>
                 </Row>

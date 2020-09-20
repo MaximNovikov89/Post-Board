@@ -7,69 +7,76 @@ import HomePage from './components/Home-Page/HomePage';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import firebase from "firebase/app";
 import { useDispatch } from 'react-redux';
-import * as actions from './Actions/actions';
+import * as userAuthAction from './store/actions/userAuth';
+import * as getPostsAction from './store/actions/getPosts';
+import * as getUsersAction from './store/actions/getUsers';
 
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
+    dispatch(getPostsAction.getPosts());
+    dispatch(getUsersAction.getUsers());
+    let currentUser;
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-
         userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            ...userAuth,
-            ...snapShot.data()
-          });
+          // setCurrentUser({
+          //   ...userAuth,
+          //   ...snapShot.data()
+          // });
+          currentUser = { ...userAuth, ...snapShot.data() };
+          dispatch(userAuthAction.setCurrentUser(currentUser));
         });
       }
       else {
-        setCurrentUser(userAuth);
+        currentUser = userAuth
+        dispatch(userAuthAction.setCurrentUser(currentUser));
       }
     });
     return () => {
       unsubscribeFromAuth();
     }
-  }, []);
-  dispatch({ type: actions.ADD_USER_OBJ, value: currentUser });
+  }, [dispatch]);
 
 
-  useEffect(() => {
-    //tries to access Users Collection and storing users Array in the Store.
-    try {
 
-      firebase
-        .firestore()
-        .collection(`users`)
-        .get()
-        .then(function (doc) {
-          let userArr = doc.docs.map(user => user.data());
-          dispatch({ type: actions.SET_FRIENDS_LIST, value: userArr });
-        })
-        .catch(function (error) {
-          console.log("Error getting document:", error);
-        })
-    }
-    catch (error) {
-      console.log(error);
-    }
+  // useEffect(() => {
+  //   //tries to access Users Collection and storing users Array in the Store.
+  //   try {
 
-  }, [currentUser]);
+  //     firebase
+  //       .firestore()
+  //       .collection(`users`)
+  //       .get()
+  //       .then(function (doc) {
+  //         let userArr = doc.docs.map(user => user.data());
+  //         dispatch({ type: actions.SET_FRIENDS_LIST, value: userArr });
+  //       })
+  //       .catch(function (error) {
+  //         console.log("Error getting document:", error);
+  //       })
+  //   }
+  //   catch (error) {
+  //     console.log(error);
+  //   }
+
+  // }, [currentUser]);
 
   return (
-
     < HashRouter >
       <Router>
         <Switch>
 
-          <Route exact path="/" component={() => { return <GreetingPage /> }} />
-          <Route exact path="/homepage" component={() => { return <HomePage /> }} />
-          <Route exact path='/log-in' component={() => { return <SignIn /> }} />
-          <Route exact path='/sign-up' component={() => { return <SignUp /> }} />
+          <Route exact path="/" key='1' component={() => { return <GreetingPage /> }} />
+          <Route exact path="/homepage" key='2' component={() => { return <HomePage /> }} />
+          <Route exact path='/log-in' key='3' component={() => { return <SignIn /> }} />
+          <Route exact path='/sign-up' key='4' component={() => { return <SignUp /> }} />
 
         </Switch>
       </Router>

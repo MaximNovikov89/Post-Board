@@ -4,14 +4,27 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-import rootReducer from './Reducers/rootReducer';
 import Framework7 from 'framework7/framework7-lite.esm.bundle.js';
 import Framework7React from 'framework7-react';
+import ReduxThunk from 'redux-thunk';
+//Reducers//
+import currentUser from './store/reducers/userAuth';
+import posts from './store/reducers/posts';
+import users from './store/reducers/users';
 
 
-const store = createStore(rootReducer);
+const rootReducer = combineReducers({
+  currentUser: currentUser,
+  posts: posts,
+  users: users
+
+});
+
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
 Framework7.use(Framework7React);
 
 ReactDOM.render(
