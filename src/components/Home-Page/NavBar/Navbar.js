@@ -4,7 +4,6 @@ import { auth } from '../../../firebase/firebase.utils';
 import Logo from '../../../Assest/Images/IconLogo.png';
 import {
     Navbar,
-    NavbarBrand,
     Row,
     Col,
 } from 'reactstrap';
@@ -16,8 +15,7 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import TextField from '@material-ui/core/TextField';
-// import IconButton from '@material-ui/core/IconButton';
+
 
 
 
@@ -101,10 +99,11 @@ const HomeNavbar = (props) => {
                         <SearchIcon />
                     </IconButton>
                 </Col>
+                <Col xs='1' ></Col>
 
                 <Col xs='1' className={classes.maxBorder}>
-                    <span>Log Out</span>
-                    <IconButton color="secondary" component="span" onClick={handleSignOut}>
+                    <span style={{ fontFamily: 'acme, cursive', fontSize: '110%' }}>Log Out</span>
+                    <IconButton color="secondary" component="span" onClick={handleSignOut} >
 
                         <ExitToAppIcon />
                     </IconButton>

@@ -13,11 +13,6 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
-// import { useDispatch, useSelector } from 'react-redux'
-// import * as authActions from '../../store/actions/userAuth';
-
-
-
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -45,7 +40,6 @@ export default function SignIn() {
     const [promiseVarification, setPromiseVarification] = useState(false);
     const history = useHistory();
     const classes = useStyles();
-    // const dispatch = useDispatch();
 
     const [userInfo, setUserInfo] = useState({
         email: '',
@@ -58,7 +52,6 @@ export default function SignIn() {
         let promise;
         promise = await signInWithGoogle();
         setPromiseVarification(promise)
-        // dispatch(authActions.googleLogIn());
     };
 
     useEffect(() => {
@@ -75,12 +68,11 @@ export default function SignIn() {
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // dispatch(authActions.emailPassLogIn(userInfo.email, userInfo.password))
         const { email, password } = userInfo;
         try {
             await auth.signInWithEmailAndPassword(email, password);
             setUserInfo({ email: '', password: '' });
-            // history.push('/homepage');
+            history.push('/homepage');
         } catch (error) {
             if (error.code === 'auth/user-not-found') {
                 alert("You have not registered yet")
@@ -92,6 +84,13 @@ export default function SignIn() {
                 console.log(error);
             }
         }
+    }
+
+    const guestLogIn = () => {
+        setUserInfo({
+            email: 'Guest@mail.com',
+            password: 'password'
+        })
     }
 
     return (
@@ -114,6 +113,7 @@ export default function SignIn() {
                         label="Email Address"
                         name="email"
                         autoComplete="off"
+                        value={userInfo.email}
 
                     />
                     <TextField
@@ -126,11 +126,13 @@ export default function SignIn() {
                         label="Password"
                         type="password"
                         autoComplete="current-password"
+                        value={userInfo.password}
 
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
+                        label="Sign In as Guest"
+                        onClick={guestLogIn}
                     />
                     <Button
                         type="submit"

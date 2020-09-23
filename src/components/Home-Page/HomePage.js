@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Row, Col } from 'reactstrap';
 import HomeNavbar from './NavBar/Navbar';
@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux';
 import ProfileCard from './ProfileCard/ProfileCard';
 import Logo from '../../Assest/Images/IconLogo.png';
 import PostList from './Post-List/PostList';
-import PostModal from './Modal/Modal';
-import FriendsSearch from './FriendsSearch/FriendsSearch';
+import PostModal from './postPrompt/PostPrompt';
+import FriendsSearch from './NavBar/FriendsSearch/FriendsSearch';
 import FriendsList from './FriendsList/FriendsList';
+import LoadingPage from '../loadingPage/LoadingPage';
 
 
 export default function HomePage() {
@@ -33,20 +34,10 @@ export default function HomePage() {
     }));
     const classes = useStyles();
 
-
     //==========States=========//
-    // const [currentUser, setCurrentUser] = useState({});
     const currentUser = useSelector(state => state.currentUser.currentUser);
     const [isModal, setIsModal] = useState(false);
     const [screenView, setScreenView] = useState(<FriendsList currentUser={currentUser} />)
-
-
-    //==========UseEffect==========//
-    // useEffect(() => {
-    //     if (user) {
-    //         setCurrentUser(user);
-    //     }
-    // }, [user]);
 
     //==========Methods=========//
     const handleModal = () => {
@@ -60,48 +51,53 @@ export default function HomePage() {
             setScreenView(<FriendsList currentUser={currentUser} />);
         }
     }
+    if (currentUser) {
+        return (
+            <div className={classes.primaryDiv} >
+                <Row>
+                    <Col xs='12' >
+                        <HomeNavbar handleSearch={handleSearch} />
+                    </Col>
+                </Row>
 
+                <Row style={{ margin: 0 }} className={classes.primaryDiv}>
+
+                    <Col xs='3' className={`d-flex justify-content-center ${classes.profileCard}`}>
+                        <ProfileCard
+
+                            avatarUrl={currentUser.photoURL}
+                            userName={currentUser.displayName}
+                            handleModal={handleModal} />
+                    </Col>
+
+                    <Col xs='7'>
+
+                        <Row >
+                            <Col xs='12' style={{ overflowY: 'scroll', maxHeight: '90vh', padding: '2rem' }}>
+
+                                {isModal ? <PostModal handleModal={handleModal} /> : <PostList />}
+
+                            </Col>
+                        </Row>
+
+                    </Col>
+
+
+                    <Col xs='2' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
+                        {/* <FriendsList currentUser={currentUser} /> */}
+                        {screenView}
+                    </Col>
+
+
+                </Row>
+            </div >
+
+        )
+    }
     return (
-        <div className={classes.primaryDiv} >
-            <Row>
-                <Col xs='12' >
-                    <HomeNavbar handleSearch={handleSearch} />
-                </Col>
-            </Row>
-
-            <Row style={{ margin: 0 }} className={classes.primaryDiv}>
-
-                <Col xs='3' className={`d-flex justify-content-center ${classes.profileCard}`}>
-                    <ProfileCard
-
-                        avatarUrl={currentUser.photoURL}
-                        userName={currentUser.displayName}
-                        handleModal={handleModal} />
-                </Col>
-
-                <Col xs='7'>
-
-                    <Row >
-                        <Col xs='12' style={{ overflowY: 'scroll', maxHeight: '90vh', padding: '2rem' }}>
-
-                            {isModal ? <PostModal handleModal={handleModal} /> : <PostList />}
-
-                        </Col>
-                    </Row>
-
-                </Col>
-
-
-                <Col xs='2' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
-                    {/* <FriendsList currentUser={currentUser} /> */}
-                    {screenView}
-                </Col>
-
-
-            </Row>
-        </div >
-
+        <LoadingPage />
     )
+
 }
 
 // Credits:

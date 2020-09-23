@@ -1,0 +1,23 @@
+.mainContainer {
+  height: 100vh;
+  /* background-image: url("../../Assest/Images//loadingBackground.jpg"); */
+  background-color: #e0fbfc;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.loadingImageContainer {
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("../../Assest/Images/LoadingLogo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

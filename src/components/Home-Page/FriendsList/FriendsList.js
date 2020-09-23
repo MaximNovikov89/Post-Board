@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import firebase from "firebase/app";
 import { useSelector } from 'react-redux';
+import { Avatar, Typography } from '@material-ui/core';
 
 
 
@@ -39,20 +40,20 @@ export default function FriendsList() {
                     }
                 });
     }
+
     return (
         <>
             <Row style={{ marginTop: '2rem' }}>
                 <Col xs='3' />
 
-                <Col xs='6'><h3>Friends</h3></Col>
-                {/* import ContactsIcon from '@material-ui/icons/Contacts'; */}
+                <Col xs='6'><h3 style={{ fontFamily: 'Lobster, cursive' }}>Friends</h3></Col>
                 <Col xs='3' />
             </Row>
             {friends ? friends.map(friend =>
                 <Row key={friend.displayName} style={{ marginBottom: '10px' }}>
-                    <Col xs='1'><img src={friend.photoURL} width="34" height="35" /></Col>
+                    <Col xs='1'><Avatar src={friend.photoURL} width="34" height="35" /></Col>
                     <Col xs='1' />
-                    <Col xs='5'><p>{friend.displayName}</p></Col>
+                    <Col xs='5' style={{ paddingTop: '2%' }}><Typography style={{ fontFamily: 'acme, cursive', fontSize: '120%' }}>{friend.displayName}</Typography></Col>
                     <Col xs='1'>
                         <IconButton
                             component="span"

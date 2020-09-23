@@ -15,7 +15,7 @@ import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
-        height: '40%',
+        height: '33%',
         maxWidth: 500,
     },
     media: {
@@ -37,12 +37,13 @@ export default function ProfileCard(props) {
     }
 
     return (
+
         <Card className={classes.root}>
             <CardHeader
                 avatar={
                     <Avatar src={props.avatarUrl} ></Avatar>
                 }
-                title={props.userName}
+                title={<Typography style={{ fontFamily: 'acme, cursive', fontSize: '120%' }}>{props.userName}</Typography>}
                 subheader={`Member since ${memberSince}`}
             />
             <CardContent>
@@ -51,10 +52,10 @@ export default function ProfileCard(props) {
                 </Typography>
             </CardContent>
             <CardActions >
-                <IconButton component="span">
+                <IconButton component="span" color='primary'>
                     <CloudUploadOutlinedIcon fontSize="large" onClick={handleOpenModal} />
                 </IconButton>
-                <Typography>Posts!</Typography>
+                <Typography style={{ fontFamily: 'lobster, cursive', fontSize: '150%' }}>Post!</Typography>
             </CardActions>
 
         </Card>
