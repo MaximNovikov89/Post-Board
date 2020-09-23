@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, Avatar, CardActions, IconButton, Typography, makeStyles } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import firebase from "firebase/app";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddFriends(props) {
+    const dispatch = useDispatch();
     const classes = useStyles();
     const friend = props.user;
     const currentUser = useSelector(state => state.currentUser.currentUser);
@@ -36,10 +36,10 @@ export default function AddFriends(props) {
     const back = () => {
         props.goBack('back');
     }
-    const handleAddFriend = () => {
+    const handleAddFriend = async () => {
         const docRef = firebase.firestore().doc(`users/${currentUser.uid}`);
 
-        docRef
+        await docRef
             .get()
             .then(
                 function (doc) {
@@ -77,6 +77,8 @@ export default function AddFriends(props) {
                         console.log(`Error adding Friend ${error}`);
                     }
                 });
+        dispatch(userAuthAction.setCurrentUser(currentUser));
+
         back();
     };
 

@@ -65,6 +65,7 @@ export default function PostCard(props) {
                 handleClick();
             }
         });
+        dispatch(getPostsAction.getPosts());
     }
 
     const handleClick = () => {
