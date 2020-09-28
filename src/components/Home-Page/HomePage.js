@@ -70,7 +70,7 @@ export default function HomePage() {
                             handleModal={handleModal} />
                     </Col>
 
-                    <Col xs='7'>
+                    <Col xs='6'>
 
                         <Row >
                             <Col xs='12' style={{ overflowY: 'scroll', maxHeight: '90vh', padding: '2rem' }}>
@@ -78,14 +78,17 @@ export default function HomePage() {
                                 {isModal ? <PostModal handleModal={handleModal} /> : <PostList />}
 
                             </Col>
+
                         </Row>
 
                     </Col>
 
 
-                    <Col xs='2' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
-                        {/* <FriendsList currentUser={currentUser} /> */}
+
+                    <Col xs='3' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
+
                         {screenView}
+
                     </Col>
 
 

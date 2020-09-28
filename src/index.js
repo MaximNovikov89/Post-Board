@@ -14,12 +14,15 @@ import ReduxThunk from 'redux-thunk';
 import currentUser from './store/reducers/userAuth';
 import posts from './store/reducers/posts';
 import users from './store/reducers/users';
+import isLiked from './store/reducers/isLiked';
+
 
 
 const rootReducer = combineReducers({
   currentUser: currentUser,
   posts: posts,
-  users: users
+  users: users,
+  isLiked: isLiked
 
 });
 

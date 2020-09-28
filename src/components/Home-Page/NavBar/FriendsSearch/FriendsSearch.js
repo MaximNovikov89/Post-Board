@@ -28,10 +28,6 @@ export default function FriendsSearch(props) {
         }
     }, [props, usersList])
 
-
-    // let usersArr = filteredUsersList.map(user =>
-    //     <div>{user.desplayName}</div>
-    // )
     return (
         <>
             <Row style={{ marginTop: '2rem' }}>

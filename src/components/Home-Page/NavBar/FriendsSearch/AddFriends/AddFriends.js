@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, Avatar, CardActions, IconButton, Typography, makeStyles } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import firebase from "firebase/app";
@@ -77,8 +77,6 @@ export default function AddFriends(props) {
                         console.log(`Error adding Friend ${error}`);
                     }
                 });
-        dispatch(userAuthAction.setCurrentUser(currentUser));
-
         back();
     };
 

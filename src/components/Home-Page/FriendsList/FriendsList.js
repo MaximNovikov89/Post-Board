@@ -53,7 +53,7 @@ export default function FriendsList() {
                 <Row key={friend.displayName} style={{ marginBottom: '10px' }}>
                     <Col xs='1'><Avatar src={friend.photoURL} width="34" height="35" /></Col>
                     <Col xs='1' />
-                    <Col xs='5' style={{ paddingTop: '2%' }}><Typography style={{ fontFamily: 'acme, cursive', fontSize: '120%' }}>{friend.displayName}</Typography></Col>
+                    <Col xs='7' style={{ paddingTop: '2%' }}><Typography style={{ fontFamily: 'acme, cursive', fontSize: '120%' }}>{friend.displayName}</Typography></Col>
                     <Col xs='1'>
                         <IconButton
                             component="span"

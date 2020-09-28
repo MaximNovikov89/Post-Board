@@ -58,7 +58,7 @@ export default function SignIn() {
         if (promiseVarification) {
             history.push('/homepage')
         }
-    }, [promiseVarification])
+    }, [promiseVarification, history])
 
     const handleChange = (evt) => {
         setUserInfo({

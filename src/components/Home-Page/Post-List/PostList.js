@@ -10,6 +10,8 @@ const List = () => {
     const user = useSelector(state => state.currentUser.currentUser);
     const posts = useSelector(state => state.posts.posts);
 
+
+
     const sortedPosts = posts.sort((a, b) => (a.exactTime > b.exactTime) ? -1 : 1);
 
     return (

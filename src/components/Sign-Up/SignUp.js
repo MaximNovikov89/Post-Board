@@ -47,13 +47,10 @@ export default function SignUp() {
     });
     const history = useHistory();
 
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUserInfo({ ...userInfo, [name]: value });
     }
-
-
     //Sign-Up with email/Password firebase
     const handleSignUp = async event => {
         event.preventDefault();

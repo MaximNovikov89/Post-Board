@@ -22,7 +22,6 @@ const PostModal = (props) => {
         let currentTime = new Date(fullDate).toLocaleTimeString(['en-GB'], { timeStyle: 'short' });
         setCurrentPost({
             ...currentPost,
-            id: uuid(),
             [element.target.name]: element.target.value,
             photoURL: user.photoURL,
             createdAt: {

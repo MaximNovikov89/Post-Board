@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 export const GET_POSTS = 'GET_POSTS';
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = () => async dispatch => {
     try {
         //tries to access Global post collection in the database, Setting posts in redux store.
         firebase
@@ -13,7 +13,7 @@ export const getPosts = () => async (dispatch) => {
                     let posts = [];
                     let data = doc.docs;
                     data.map(post => {
-                        posts.push(post.data())
+                        posts.push({ ...post.data(), id: post.id })
                     })
 
                     dispatch({ type: GET_POSTS, payload: posts });

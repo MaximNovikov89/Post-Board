@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import firebase from "firebase/app";
-import * as getPostsAction from '../../../../store/actions/getPosts';
+import React, { useState, useEffect } from 'react';
+// import * as getPostsAction from '../../../../store/actions/getPosts';
+import * as addLikeAction from '../../../../store/actions/addLike';
+import * as isLikedAction from '../../../../store/actions/isLiked';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardHeader, CardContent, CardFooter, Row, Col } from 'framework7-react';
 import { IconButton, makeStyles, Badge } from '@material-ui/core';
@@ -33,40 +34,23 @@ export default function PostCard(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.currentUser.currentUser);
+    const isLiked = useSelector(state => state.isLiked.isLiked)
     const post = props.post;
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        dispatch(getPostsAction.getPosts());
-    })
+        if (isLiked) {
+            handleClick();
+            dispatch(isLikedAction.setIsLiked(false));
+        }
+    }, [isLiked])
 
-    const handleLike = async () => {
-        let userId = currentUser.uid;
-        const globalPosts = await firebase.firestore().collection('globalPosts').get();
+    const likeHandler = async () => {
+        dispatch(addLikeAction.handleLike(currentUser.uid, post.id));
 
-        globalPosts.docs.map(doc => {
-            let postId = doc.id
-            let isLiked = doc.data().liked.findIndex(id => id === userId);
+    };
 
-            if (isLiked === -1) {
-                let docRef = firebase.firestore().doc(`globalPosts/${postId}`);
-
-                docRef.get().then(
-                    function (doc) {
-                        let likedPost = doc.data();
-                        likedPost.liked.push(userId);
-                        likedPost.likes = likedPost.likes + 1;
-                        docRef.update(likedPost);
-                    }
-                );
-            }
-            else {
-                handleClick();
-            }
-        });
-        dispatch(getPostsAction.getPosts());
-    }
 
     const handleClick = () => {
         setOpen(true);
@@ -113,7 +97,7 @@ export default function PostCard(props) {
                 <CardFooter className="no-border" style={{ marginTop: '5%' }}>
                     <Row >
                         <Col>
-                            <IconButton component="span" color='primary' onClick={handleLike}>
+                            <IconButton component="span" color='primary' onClick={likeHandler}>
                                 <ThumbUpAlt />
                             </IconButton>
                             <Badge badgeContent={props.post.likes} color="primary" />
