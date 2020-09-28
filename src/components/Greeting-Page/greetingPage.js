@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GreetingPage() {
     const classes = useStyles();
-    const greetingText = ['Share your thoughts pictures and work ', <br />, 'or what ever is on your to mind'];
+    const greetingText = ['Share your thoughts pictures and work ', <br />, 'or what ever is on your mind'];
 
 
     return (

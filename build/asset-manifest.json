@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/Post-Board/static/css/main.3e5f8dcf.chunk.css",
+    "main.js": "/Post-Board/static/js/main.6fafbcf6.chunk.js",
+    "main.js.map": "/Post-Board/static/js/main.6fafbcf6.chunk.js.map",
+    "runtime-main.js": "/Post-Board/static/js/runtime-main.b824885f.js",
+    "runtime-main.js.map": "/Post-Board/static/js/runtime-main.b824885f.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/Post-Board/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.4e5386ee.chunk.js": "/Post-Board/static/js/2.4e5386ee.chunk.js",
+    "static/js/2.4e5386ee.chunk.js.map": "/Post-Board/static/js/2.4e5386ee.chunk.js.map",
+    "index.html": "/Post-Board/index.html",
+    "precache-manifest.6391ae2d69eab8dab7bc0d6d8ddfc4f9.js": "/Post-Board/precache-manifest.6391ae2d69eab8dab7bc0d6d8ddfc4f9.js",
+    "service-worker.js": "/Post-Board/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/Post-Board/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.3e5f8dcf.chunk.css.map": "/Post-Board/static/css/main.3e5f8dcf.chunk.css.map",
+    "static/js/2.4e5386ee.chunk.js.LICENSE.txt": "/Post-Board/static/js/2.4e5386ee.chunk.js.LICENSE.txt",
+    "static/media/IconLogo.png": "/Post-Board/static/media/IconLogo.3c247b46.png",
+    "static/media/loadingPage.css": "/Post-Board/static/media/LoadingLogo.9168838f.png",
+    "static/media/backGroundMain.jpg": "/Post-Board/static/media/backGroundMain.3214051d.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b824885f.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.4e5386ee.chunk.js",
+    "static/css/main.3e5f8dcf.chunk.css",
+    "static/js/main.6fafbcf6.chunk.js"
+  ]
+}

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardHeader, Avatar, CardActions, IconButton, Typography, makeStyles } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import firebase from "firebase/app";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddFriends(props) {
-    const dispatch = useDispatch();
     const classes = useStyles();
     const friend = props.user;
     const currentUser = useSelector(state => state.currentUser.currentUser);
@@ -106,8 +105,6 @@ export default function AddFriends(props) {
 
                     </CardActions>
             }
-
-
         </Card >
     )
 }

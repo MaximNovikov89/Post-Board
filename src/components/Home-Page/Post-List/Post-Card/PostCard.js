@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import * as getPostsAction from '../../../../store/actions/getPosts';
 import * as addLikeAction from '../../../../store/actions/addLike';
 import * as isLikedAction from '../../../../store/actions/isLiked';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +6,7 @@ import { Card, CardHeader, CardContent, CardFooter, Row, Col } from 'framework7-
 import { IconButton, makeStyles, Badge } from '@material-ui/core';
 import ThumbUpAlt from '@material-ui/icons/ThumbUpAlt';
 import EventNoteTwoToneIcon from '@material-ui/icons/EventNoteTwoTone';
+import WarningIcon from '@material-ui/icons/Warning';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -107,8 +107,8 @@ export default function PostCard(props) {
 
             </Card >
             <div className={classes.rootSnakbar}>
-                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success">
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} >
+                    <Alert onClose={handleClose} severity="success" icon={<WarningIcon />}>
                         You already liked this post!
                      </Alert>
                 </Snackbar>

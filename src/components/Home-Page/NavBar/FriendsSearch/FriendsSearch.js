@@ -29,7 +29,7 @@ export default function FriendsSearch(props) {
     }, [props, usersList])
 
     return (
-        <>
+        <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
             <Row style={{ marginTop: '2rem' }}>
                 <Col xs='1' style={{ marginRight: '3%' }}>
                     <IconButton color="primary" component="span" size='small' >
@@ -53,7 +53,7 @@ export default function FriendsSearch(props) {
                 <div key={user.email}>{user ? <AddFriends user={user} goBack={props.goBack} /> : <div>No user Found...</div>}</div>
             )}
 
-        </>
+        </div >
     )
 
 

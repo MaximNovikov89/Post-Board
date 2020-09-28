@@ -29,7 +29,9 @@ export default function ProfileCard(props) {
     const classes = useStyles();
     const member = useSelector(state => state.currentUser.currentUser);
     const friendsCount = member.friends.length;
-    const memberSince = member.metadata.creationTime.slice(5, 16);
+    const memberSinceDate = member.metadata.creationTime.split(" ");
+    const memberSince = memberSinceDate[1] + " " + memberSinceDate[2] + " " + memberSinceDate[3];
+
 
     //==========Methods=========//
     const handleOpenModal = () => {

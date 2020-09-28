@@ -21,7 +21,6 @@ export const handleLike = (userId, postId) => async dispatch => {
                         currentPost = { ...post, likes: post.likes + 1, liked: [...post.liked, userId] };
                         docRef.update({ ...currentPost });
                         dispatch(getPostsAction.getPosts());
-                        // dispatch(isLikedAction.setIsLiked(true));
                     }
                 }
             );
