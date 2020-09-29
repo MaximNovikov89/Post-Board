@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import uuid from 'react-uuid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import firebase from "firebase/app";
 

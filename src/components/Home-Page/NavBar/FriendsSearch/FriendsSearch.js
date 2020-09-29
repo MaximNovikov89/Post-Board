@@ -8,7 +8,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 export default function FriendsSearch(props) {
-    //==========States=========//
+    //==========State=========//
     const usersList = useSelector(state => state.users.usersList);
     const [filteredUsersList, setFilteredUsersList] = useState([]);
 
@@ -28,8 +28,9 @@ export default function FriendsSearch(props) {
         }
     }, [props, usersList])
 
+
     return (
-        <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+        < >
             <Row style={{ marginTop: '2rem' }}>
                 <Col xs='1' style={{ marginRight: '3%' }}>
                     <IconButton color="primary" component="span" size='small' >
@@ -44,17 +45,13 @@ export default function FriendsSearch(props) {
                     </Typography>
                 </Col>
                 <Col xs='1' />
-
-
             </Row>
-
-
             {filteredUsersList.map(user =>
-                <div key={user.email}>{user ? <AddFriends user={user} goBack={props.goBack} /> : <div>No user Found...</div>}</div>
+                <div key={user.email}>
+                    <AddFriends user={user} goBack={props.goBack} />
+                </div>
             )}
 
-        </div >
+        </>
     )
-
-
 }

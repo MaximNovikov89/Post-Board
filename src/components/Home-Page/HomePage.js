@@ -34,10 +34,10 @@ export default function HomePage() {
     }));
     const classes = useStyles();
 
-    //==========States=========//
+    //==========State=========//
     const currentUser = useSelector(state => state.currentUser.currentUser);
     const [isModal, setIsModal] = useState(false);
-    const [screenView, setScreenView] = useState(<FriendsList currentUser={currentUser} />)
+    const [screenView, setScreenView] = useState(<PostList />)
 
     //==========Methods=========//
     const handleModal = () => {
@@ -48,7 +48,7 @@ export default function HomePage() {
             setScreenView(<FriendsSearch inputSearch={value} goBack={handleSearch} />);
         }
         else {
-            setScreenView(<FriendsList currentUser={currentUser} />);
+            setScreenView(<PostList />);
         }
     }
     if (currentUser) {
@@ -75,7 +75,7 @@ export default function HomePage() {
                         <Row >
                             <Col xs='12' style={{ overflowY: 'scroll', maxHeight: '90vh', padding: '2rem' }}>
 
-                                {isModal ? <PostModal handleModal={handleModal} /> : <PostList />}
+                                {isModal ? <PostModal handleModal={handleModal} /> : screenView}
 
                             </Col>
 
@@ -87,7 +87,9 @@ export default function HomePage() {
 
                     <Col xs='3' style={{ backgroundColor: '#E0FBFC', zIndex: '1' }}>
 
-                        {screenView}
+                        <FriendsList />
+                        {/* {screenView} */}
+
 
                     </Col>
 
@@ -104,4 +106,4 @@ export default function HomePage() {
 }
 
 // Credits:
-{/* <a href='https://pngtree.com/so/hanging-bulletin-board'>hanging-bulletin-board png from pngtree.com</a> */ }
+//<a href='https://pngtree.com/so/hanging-bulletin-board'>hanging-bulletin-board png from pngtree.com</a>

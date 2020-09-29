@@ -131,7 +131,7 @@ export default function SignIn() {
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
-                        label="Sign In as Guest"
+                        label="Sign in as Guest"
                         onClick={guestLogIn}
                     />
                     <Button
@@ -151,14 +151,9 @@ export default function SignIn() {
                         className={classes.submit}
                         onClick={googleSignIn}
                     >
-                        Sign In With Google
+                        Sign in with Google
                     </Button>
                     <Grid container>
-                        {/* <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                             </Link>
-                        </Grid> */}
                         <Grid item>
                             <Link href="#/sign-up" variant="body2">
                                 {"Don't have an account? Sign Up"}

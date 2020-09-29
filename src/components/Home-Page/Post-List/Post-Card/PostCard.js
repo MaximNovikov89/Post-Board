@@ -12,7 +12,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} variant="filled"  {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ export default function PostCard(props) {
             handleClick();
             dispatch(isLikedAction.setIsLiked(false));
         }
-    }, [isLiked])
+    }, [isLiked, dispatch])
 
     const likeHandler = async () => {
         dispatch(addLikeAction.handleLike(currentUser.uid, post.id));
@@ -107,10 +107,16 @@ export default function PostCard(props) {
 
             </Card >
             <div className={classes.rootSnakbar}>
-                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} >
-                    <Alert onClose={handleClose} severity="success" icon={<WarningIcon />}>
+                <Snackbar
+                    open={open}
+                    autoHideDuration={3000}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+
+                    <Alert icon={<WarningIcon />} style={{ padding: '0.25rem 0.80rem' }}>
                         You already liked this post!
                      </Alert>
+
                 </Snackbar>
 
             </div>

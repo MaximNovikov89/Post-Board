@@ -16,9 +16,6 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -33,10 +30,7 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: '5rem',
         padding: '0.6rem',
     },
-    logoImg: { //Broken responsivness - ***FIX***
-        // width: '4.5rem',
-        // position: 'relative',
-        // color: 'black',
+    logoImg: {
         cursor: 'pointer',
         width: theme.spacing(19),
         height: theme.spacing(19),
@@ -83,7 +77,6 @@ const HomeNavbar = (props) => {
                 <Col xs='2' style={{ paddingLeft: '0' }} className={classes.maxBorder}></Col>
 
                 <Col xs='3'>
-                    {/* <NavbarBrand className={classes.navBarBrand}>Post-Board</NavbarBrand> */}
 
                 </Col>
 
@@ -94,7 +87,6 @@ const HomeNavbar = (props) => {
                         onChange={(e) => setInputValue(e.target.value)}
                         autoComplete="off" />
 
-                    {/* //Broken responsivness - ***FIX*** */}
                     <IconButton color="primary" component="span" style={{ marginTop: '0.5rem' }} onClick={() => startSearch('friends')}>
                         <SearchIcon />
                     </IconButton>

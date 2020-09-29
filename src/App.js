@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { HashRouter as Router, Switch, Route, HashRouter } from 'react-router-dom';
 import GreetingPage from './components/Greeting-Page/greetingPage';
 import SignUp from './components/Sign-Up/SignUp';
 import SignIn from './components/Sign-in/Sign-in';
 import HomePage from './components/Home-Page/HomePage';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-import firebase from "firebase/app";
 import { useDispatch } from 'react-redux';
 import * as userAuthAction from './store/actions/userAuth';
 import * as getPostsAction from './store/actions/getPosts';

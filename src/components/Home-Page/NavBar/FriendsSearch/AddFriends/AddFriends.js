@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     mainCard: {
         margin: '10px',
         backgroundColor: '#c8ddde',
-
     }
 }));
 
@@ -79,6 +78,7 @@ export default function AddFriends(props) {
         back();
     };
 
+
     return (
 
         <Card className={classes.mainCard}>
@@ -99,10 +99,8 @@ export default function AddFriends(props) {
                     </CardActions>
                     : <CardActions >
                         <IconButton component="span" color='primary'>
-                            {/* <AddCircleOutlineIcon fontSize="small" onClick={handleAddFriend} /> */}
                             <Typography onClick={handleAddFriend} align='center' >Add Friend</Typography>
                         </IconButton>
-
                     </CardActions>
             }
         </Card >
